@@ -1,0 +1,4 @@
+name: city_connect
+dataset: dataos://thirdparty01:none/city
+format: csv
+schemaPath: dataos://thirdparty01:none/schemas/avsc/city.avsc

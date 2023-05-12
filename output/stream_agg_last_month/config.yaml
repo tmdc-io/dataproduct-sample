@@ -1,0 +1,7 @@
+name: stream_agg_last_month
+dataset: dataos://fastbase:default/orders_aggregated_data?acl=rw
+title: Orders Month Level Agg Data
+description: Orders Month Level Agg Data
+format: Pulsar
+options:
+  checkpointLocation: dataos://icebase:sys01/checkpoints/orders/order_data/0001?acl=rw

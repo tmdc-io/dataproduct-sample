@@ -1,0 +1,16 @@
+name: "query-default"
+version: v1
+type: compute
+layer: system
+description: "default query compute"
+compute:
+  dataplane: hub
+  purpose: query
+  nodePool:
+    nodeSelector:
+      "dataos.io/purpose": "query"
+    tolerations:
+      - key: "dedicated"
+        operator: "Equal"
+        value: "query"
+        effect: "NoSchedule"

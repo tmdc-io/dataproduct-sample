@@ -1,0 +1,4 @@
+name: product_connect
+dataset: dataos://thirdparty01:none/product
+format: csv
+schemaPath: dataos://thirdparty01:none/schemas/avsc/product.avsc

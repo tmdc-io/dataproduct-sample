@@ -1,0 +1,3 @@
+name: pos_transaction_connect
+dataset: dataos://poss3:none/pos_transactions
+format: json

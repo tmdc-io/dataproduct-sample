@@ -1,0 +1,45 @@
+sequence:
+- name: customers
+  doc: Selecting all columns from customers
+  sql: |
+    SELECT * FROM input_customers
+
+- name: stores
+  doc: Selecting last version data of stores
+  sql: |
+    SELECT * FROM input_stores
+
+- name: products
+  doc: Selecting last version data of Products
+  sql: |
+    SELECT * FROM input_products
+
+- name: txns_discount_exploded
+  doc: Flattening transation line item and discont column data for not returned products and joining with transation data 
+  sqlFile: Ref://transformation/steps/txns_discount_exploded.sql
+
+- name: txn_return_y
+  doc: Flattening transation line item data for returned product
+  sqlFile: Ref://transformation/steps/txn_return_y.sql
+
+- name: flatten_txns_union
+  doc: Combining flatten results of returned and not returned products
+  sqlFile: Ref://transformation/steps/flatten_txns_union.sql
+
+- name: orders_enriched_data
+  doc: Joining transation data with products, stores and customers data
+  sqlFile: Ref://transformation/steps/orders_enriched_data.sql
+  functions:
+    - name: merge
+      separator: "_"
+      asColumn: "_dataos_record_key"
+      columns:
+        - order_id
+        - order_sku_id
+- name: customer_orders
+  doc: Prepare fastbase stream data
+  sqlFile: Ref://transformation/steps/customer_orders.sql
+
+- name: stream_agg_last_month
+  doc: Aggregating data of last one month for total amount and total orders_enriched_data
+  sqlFile: Ref://transformation/steps/stream_agg_last_month.sql

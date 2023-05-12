@@ -1,0 +1,11 @@
+- column: order_amount
+  filter: brand_name == 'Urbane'
+  tests:
+  - avg > 500
+  - distinct_count > 100
+  - missing_count < 100
+- column: brand_name
+  validFormat:
+    regex: Awkward
+  tests:
+    - invalid_count <= 5

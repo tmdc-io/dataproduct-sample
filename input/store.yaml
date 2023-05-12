@@ -1,0 +1,4 @@
+name: store_connect
+dataset: dataos://thirdparty01:none/store
+format: csv
+schemaPath: dataos://thirdparty01:none/schemas/avsc/store.avsc

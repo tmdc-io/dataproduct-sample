@@ -1,0 +1,49 @@
+---
+version: v1
+name: order-enriched-dataset
+type: workflow
+tags:
+- Offline Sales
+- Enriched
+description: This job is enriching offline sales data with store, customer and product
+workflow:
+  dag:
+  - name: order-enriched
+    title: Offline Sales Data Enricher Job
+    description: This job is enriching offline sales data with store, customer and product
+    spec:
+      tags:
+      - Rio
+      - Offline Sales
+      - Enriched
+      - Evolution
+      stack: flare:4.0
+      compute: runnable-default
+      flare:
+        driver:
+          coreLimit: 2400m
+          cores: 2
+          memory: 3072M
+        executor:
+          coreLimit: 2400m
+          cores: 2
+          instances: 2
+          memory: 6000M
+        job:
+          explain: true
+          inputs:
+            - Ref://input/city.yaml
+            - Ref://input/customer.yaml
+            - Ref://input/pos_order.yaml
+            - Ref://input/product.yaml
+            - Ref://input/store.yaml
+          logLevel: INFO
+          steps:
+          - Ref://transformation/steps/step.yaml
+          outputs:
+            - Ref://output/tbl_orders_enriched/config.yaml
+            - Ref://output/stream_agg_last_month/config.yaml
+          variables:
+            keepSystemColumns: "false"
+        sparkConf:
+          - spark.sql.legacy.timeParserPolicy: LEGACY

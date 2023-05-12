@@ -1,0 +1,24 @@
+name: minervaquery
+version: v1
+type: cluster
+tags:
+  - cluster
+  - minerva
+description: Cluster to query icebase depot
+cluster:
+  runAsApiKey: {APIKEY}
+  compute: query-default
+  minerva:
+    replicas: 1
+    resources:
+      requests:
+        cpu: 2000m
+        memory: 2Gi
+      limits:
+        cpu: 2000m
+        memory: 2Gi
+    depots:
+      - address: dataos://icebase:default
+    debug:
+      logLevel: INFO
+      trinoLogLevel: ERROR

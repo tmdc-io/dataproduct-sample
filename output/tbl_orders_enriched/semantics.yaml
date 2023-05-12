@@ -1,0 +1,11 @@
+- columnName: "first_name"
+  tags:
+    - PII.Person
+    - PII.Name
+- columnName: "last_name"
+  tags:
+    - PII.Person
+    - PII.Name
+- columnName: "email_id"
+  tags:
+    - PII.Email

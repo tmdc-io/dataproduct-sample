@@ -1,0 +1,32 @@
+name: orders_enriched_data
+dataset: dataos://icebase:thoughtworks/orders_enriched?acl=rw
+format: Iceberg
+tags:
+  - Rio
+  - Offline Sales
+title: Offline Sales Data Enriched
+description: Offline sales data enriched with stores, customer and products
+options:
+  saveMode: overwrite
+  sort:
+    mode: partition
+    columns:
+      - name: year
+        order: desc  
+      - name: month
+        order: desc 
+      - name: day
+        order: desc     
+  iceberg:
+    properties:
+      write.format.default: parquet
+      write.metadata.compression-codec: gzip
+    partitionSpec:
+      - type: identity
+        column: year
+      - type: identity
+        column: month
+      - type: identity
+        column: day
+assertions: Ref://output/tbl_orders_enriched/assertions.yaml
+columnTags: Ref://output/tbl_orders_enriched/semantics.yaml

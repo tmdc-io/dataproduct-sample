@@ -1,0 +1,16 @@
+name: "runnable-default"
+version: v1
+type: compute
+layer: system
+description: "default runnable compute"
+compute:
+  dataplane: hub
+  purpose: runnable
+  nodePool:
+    nodeSelector:
+      "dataos.io/purpose": "runnable"
+    tolerations:
+      - key: "dedicated"
+        operator: "Equal"
+        value: "runnable"
+        effect: "NoSchedule"
